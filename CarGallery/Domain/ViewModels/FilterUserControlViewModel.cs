@@ -6,5 +6,10 @@ namespace CarGallerry.Domain.ViewModels
 {
     public class FilterUserControlViewModel:BaseViewModel
     {
+
+        public FilterUserControlViewModel()
+        {
+
+        }
     }
 }
