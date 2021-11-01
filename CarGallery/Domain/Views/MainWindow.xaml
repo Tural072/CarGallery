@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CarGallerry"
+        xmlns:local="clr-namespace:CarGallerry" xmlns:ie1="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1200"
         ResizeMode="NoResize"
@@ -17,8 +17,30 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox Grid.Column="1" 
-                 Name="carListbox"></ListBox>
+        <ListBox x:Name="mainListbox"
+                 ItemsSource="{Binding ImagePaths}" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                 Grid.Column="1"
+                 Background="Transparent"
+                 >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel ></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Grid.Row="0" >
+                        <Image x:Name="Image1" Width="200" Height="200" Margin="0,8,0,0" Source="{Binding Path}"></Image>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ie1:Interaction.Triggers>
+                <ie1:EventTrigger EventName="SelectionChanged">
+                    <ie1:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=mainListbox, Path=SelectedItem}" />
+                </ie1:EventTrigger>
+            </ie1:Interaction.Triggers>
+        </ListBox>
         <Grid x:Name="userGrid"
               Grid.Column="0"
               >
