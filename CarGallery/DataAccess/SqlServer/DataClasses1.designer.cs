@@ -42,9 +42,6 @@ namespace CarGallery.DataAccess.SqlServer
     partial void InsertCar(Car instance);
     partial void UpdateCar(Car instance);
     partial void DeleteCar(Car instance);
-    partial void InsertImagePath(ImagePath instance);
-    partial void UpdateImagePath(ImagePath instance);
-    partial void DeleteImagePath(ImagePath instance);
     partial void InsertPetrolType(PetrolType instance);
     partial void UpdatePetrolType(PetrolType instance);
     partial void DeletePetrolType(PetrolType instance);
@@ -109,14 +106,6 @@ namespace CarGallery.DataAccess.SqlServer
 			get
 			{
 				return this.GetTable<Car>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ImagePath> ImagePaths
-		{
-			get
-			{
-				return this.GetTable<ImagePath>();
 			}
 		}
 		
@@ -491,19 +480,17 @@ namespace CarGallery.DataAccess.SqlServer
 		
 		private System.Nullable<int> _Milage;
 		
-		private System.DateTime _Release_Date;
+		private int _Release_Date;
 		
 		private System.Nullable<decimal> _Price;
 		
-		private System.Nullable<int> _ImagePath_Id;
+		private string _ImagePath;
 		
 		private EntityRef<BanType> _BanType;
 		
 		private EntityRef<Brand> _Brand;
 		
 		private EntityRef<CarColor> _CarColor;
-		
-		private EntityRef<ImagePath> _ImagePath;
 		
 		private EntityRef<PetrolType> _PetrolType;
 		
@@ -525,12 +512,12 @@ namespace CarGallery.DataAccess.SqlServer
     partial void OnIsNewChanged();
     partial void OnMilageChanging(System.Nullable<int> value);
     partial void OnMilageChanged();
-    partial void OnRelease_DateChanging(System.DateTime value);
+    partial void OnRelease_DateChanging(int value);
     partial void OnRelease_DateChanged();
     partial void OnPriceChanging(System.Nullable<decimal> value);
     partial void OnPriceChanged();
-    partial void OnImagePath_IdChanging(System.Nullable<int> value);
-    partial void OnImagePath_IdChanged();
+    partial void OnImagePathChanging(string value);
+    partial void OnImagePathChanged();
     #endregion
 		
 		public Car()
@@ -538,7 +525,6 @@ namespace CarGallery.DataAccess.SqlServer
 			this._BanType = default(EntityRef<BanType>);
 			this._Brand = default(EntityRef<Brand>);
 			this._CarColor = default(EntityRef<CarColor>);
-			this._ImagePath = default(EntityRef<ImagePath>);
 			this._PetrolType = default(EntityRef<PetrolType>);
 			OnCreated();
 		}
@@ -699,8 +685,8 @@ namespace CarGallery.DataAccess.SqlServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Release_Date", DbType="DateTime2 NOT NULL")]
-		public System.DateTime Release_Date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Release_Date", DbType="Int NOT NULL")]
+		public int Release_Date
 		{
 			get
 			{
@@ -739,26 +725,22 @@ namespace CarGallery.DataAccess.SqlServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagePath_Id", DbType="Int")]
-		public System.Nullable<int> ImagePath_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagePath", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string ImagePath
 		{
 			get
 			{
-				return this._ImagePath_Id;
+				return this._ImagePath;
 			}
 			set
 			{
-				if ((this._ImagePath_Id != value))
+				if ((this._ImagePath != value))
 				{
-					if (this._ImagePath.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnImagePath_IdChanging(value);
+					this.OnImagePathChanging(value);
 					this.SendPropertyChanging();
-					this._ImagePath_Id = value;
-					this.SendPropertyChanged("ImagePath_Id");
-					this.OnImagePath_IdChanged();
+					this._ImagePath = value;
+					this.SendPropertyChanged("ImagePath");
+					this.OnImagePathChanged();
 				}
 			}
 		}
@@ -865,40 +847,6 @@ namespace CarGallery.DataAccess.SqlServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ImagePath_Car", Storage="_ImagePath", ThisKey="ImagePath_Id", OtherKey="Id", IsForeignKey=true)]
-		public ImagePath ImagePath
-		{
-			get
-			{
-				return this._ImagePath.Entity;
-			}
-			set
-			{
-				ImagePath previousValue = this._ImagePath.Entity;
-				if (((previousValue != value) 
-							|| (this._ImagePath.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ImagePath.Entity = null;
-						previousValue.Cars.Remove(this);
-					}
-					this._ImagePath.Entity = value;
-					if ((value != null))
-					{
-						value.Cars.Add(this);
-						this._ImagePath_Id = value.Id;
-					}
-					else
-					{
-						this._ImagePath_Id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("ImagePath");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PetrolType_Car", Storage="_PetrolType", ThisKey="PetrolTypes_Id", OtherKey="Id", IsForeignKey=true)]
 		public PetrolType PetrolType
 		{
@@ -951,120 +899,6 @@ namespace CarGallery.DataAccess.SqlServer
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ImagePath")]
-	public partial class ImagePath : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Path;
-		
-		private EntitySet<Car> _Cars;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnPathChanging(string value);
-    partial void OnPathChanged();
-    #endregion
-		
-		public ImagePath()
-		{
-			this._Cars = new EntitySet<Car>(new Action<Car>(this.attach_Cars), new Action<Car>(this.detach_Cars));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Path", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Path
-		{
-			get
-			{
-				return this._Path;
-			}
-			set
-			{
-				if ((this._Path != value))
-				{
-					this.OnPathChanging(value);
-					this.SendPropertyChanging();
-					this._Path = value;
-					this.SendPropertyChanged("Path");
-					this.OnPathChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ImagePath_Car", Storage="_Cars", ThisKey="Id", OtherKey="ImagePath_Id")]
-		public EntitySet<Car> Cars
-		{
-			get
-			{
-				return this._Cars;
-			}
-			set
-			{
-				this._Cars.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Cars(Car entity)
-		{
-			this.SendPropertyChanging();
-			entity.ImagePath = this;
-		}
-		
-		private void detach_Cars(Car entity)
-		{
-			this.SendPropertyChanging();
-			entity.ImagePath = null;
 		}
 	}
 	

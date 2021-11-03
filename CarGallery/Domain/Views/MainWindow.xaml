@@ -18,7 +18,7 @@
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <ListBox x:Name="mainListbox"
-                 ItemsSource="{Binding ImagePaths}" 
+                 ItemsSource="{Binding Cars}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                  Grid.Column="1"
                  Background="Transparent"
@@ -31,7 +31,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Grid.Row="0" >
-                        <Image x:Name="Image1" Width="200" Height="200" Margin="0,8,0,0" Source="{Binding Path}"></Image>
+                        <Image x:Name="Image1" Width="200" Height="200" Margin="0,8,0,0" Source="{Binding ImagePath}"></Image>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

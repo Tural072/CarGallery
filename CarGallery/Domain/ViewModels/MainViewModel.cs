@@ -13,13 +13,13 @@ namespace CarGallerry.Domain.ViewModels
     {
         public FilterUserControl filterUserControl { get; set; }
         public RelayCommand FilterBtnCommand { get; set; }
-        public ObservableCollection<ImagePath> ImagePaths { get; set; }
-        public IRepository<ImagePath> _repo { get; set; }
-        public MainViewModel(MainWindow mainWindow,IImagePathRepository pathRepository)
+        public ObservableCollection<Car> Cars { get; set; }
+        public IRepository<Car> _repo { get; set; }
+        public MainViewModel(MainWindow mainWindow,ICarsRepository pathRepository)
         {
             _repo = pathRepository;
-            ImagePaths = new ObservableCollection<ImagePath>();
-            ImagePaths = _repo.GetAllData();
+            Cars = new ObservableCollection<Car>();
+            Cars = _repo.GetAllData();
             filterUserControl = new FilterUserControl();
             FilterBtnCommand = new RelayCommand((sender) =>
               {

@@ -84,13 +84,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\SqlServer\ImagePathRepository.cs" />
     <Compile Include="DataAccess\SqlServer\PetrolTypeRepository.cs" />
     <Compile Include="Domain\Abstractions\IBanTypeRepository.cs" />
     <Compile Include="Domain\Abstractions\IBrandsRepostory.cs" />
     <Compile Include="Domain\Abstractions\ICarColorsRepository.cs" />
     <Compile Include="Domain\Abstractions\ICarsRepository.cs" />
-    <Compile Include="Domain\Abstractions\IImagePathRepository.cs" />
     <Compile Include="Domain\Abstractions\IPetrolTypeRepository.cs" />
     <Compile Include="Domain\Abstractions\IRepository.cs" />
     <Compile Include="Domain\AdditionalClasses\ObserverHelper.cs" />
