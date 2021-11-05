@@ -15,7 +15,7 @@ namespace CarGallery.DataAccess.SqlServer
         public BanTypesRepository()
         {
             DataClasses1DataContext = new DataClasses1DataContext();
-        }
+        } 
         public void AddData(BanType data)
         {
             throw new NotImplementedException();
