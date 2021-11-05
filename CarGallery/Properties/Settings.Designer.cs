@@ -33,5 +33,16 @@ namespace CarGallery.Properties {
                 return ((string)(this["CarGalleryDbConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=STHQ011A-14;Initial Catalog=CarGalleryDb;User ID=admin;Password=admin" +
+            ";Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
+        public string CarGalleryDbConnectionString1 {
+            get {
+                return ((string)(this["CarGalleryDbConnectionString1"]));
+            }
+        }
     }
 }

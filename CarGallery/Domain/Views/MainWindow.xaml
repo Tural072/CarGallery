@@ -17,30 +17,43 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox x:Name="mainListbox"
-                 ItemsSource="{Binding Cars}" 
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                 Grid.Column="1"
-                 Background="Transparent"
-                 >
+        <ListBox Name="Listbox" Grid.Column="1" ItemsSource="{Binding Cars}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel ></WrapPanel>
+                    <WrapPanel></WrapPanel>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Grid.Row="0" >
-                        <Image x:Name="Image1" Width="200" Height="200" Margin="0,8,0,0" Source="{Binding ImagePath}"></Image>
-                    </StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*"></RowDefinition>
+                            <RowDefinition Height="4*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" x:Name="border1" Width="200" Height="250" Background="Transparent" BorderBrush="Red" BorderThickness="5" Margin="5,25,5,5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10*"></RowDefinition>
+                                    <RowDefinition Height="3*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" >
+                                    <Image x:Name="Image" Width="150" Height="150" Margin="0,8,0,0" Source="{Binding Path=ImagePath.Path}"></Image>
+                                    <Label Width="200" Height="5" Background="Red" Margin="0,4,0,0"></Label>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Vertical" >
+                                    <TextBlock x:Name="ProductNameText" Text="{Binding Path=Brand.Name}" FontSize="14" Foreground="#FF25BFBF" FontWeight="Bold" Width="180" Height="20" Margin="5,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                                    <TextBlock x:Name="ProductPriceText" Text="{Binding Path=Price}" FontSize="14" Foreground="#FF25BFBF" FontWeight="Bold" Width="180" Height="20" Margin="5,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                                </StackPanel>
+                                <WrapPanel Grid.Row="1">
+                                </WrapPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <ie1:Interaction.Triggers>
-                <ie1:EventTrigger EventName="SelectionChanged">
-                    <ie1:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=mainListbox, Path=SelectedItem}" />
-                </ie1:EventTrigger>
-            </ie1:Interaction.Triggers>
         </ListBox>
+
+
         <Grid x:Name="userGrid"
               Grid.Column="0"
               >

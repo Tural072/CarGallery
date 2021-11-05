@@ -1,4 +1,5 @@
-﻿using CarGallery.Domain.Abstractions;
+﻿using CarGallerry.Domain.AdditionalClasses;
+using CarGallery.Domain.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ namespace CarGallery.DataAccess.SqlServer
 {
     public class BanTypesRepository : IBanTypeRepository
     {
+        public DataClasses1DataContext DataClasses1DataContext { get; set; }
         public void AddData(BanType data)
         {
             throw new NotImplementedException();
@@ -22,7 +24,9 @@ namespace CarGallery.DataAccess.SqlServer
 
         public ObservableCollection<BanType> GetAllData()
         {
-            throw new NotImplementedException();
+            var banType = from BanType in DataClasses1DataContext.BanTypes
+                          select BanType;
+            return ObserverHelper.ToObservableCollection(banType);
         }
 
         public BanType GetData(int id)

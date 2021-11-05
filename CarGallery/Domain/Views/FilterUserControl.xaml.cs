@@ -22,7 +22,7 @@ namespace CarGallerry.Views
         public FilterUserControl()
         {
             InitializeComponent();
-            DataContext = new FilterUserControlViewModel();
+            DataContext = new FilterUserControlViewModel(this);
         }
     }
 }

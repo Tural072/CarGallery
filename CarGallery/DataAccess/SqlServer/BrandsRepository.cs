@@ -1,4 +1,5 @@
-﻿using CarGallery.Domain.Abstractions;
+﻿using CarGallerry.Domain.AdditionalClasses;
+using CarGallery.Domain.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ namespace CarGallery.DataAccess.SqlServer
 {
     public class BrandsRepository : IBrandsRepostory
     {
+        public DataClasses1DataContext DataClasses1DataContext { get; set; }
         public void AddData(Brand data)
         {
             throw new NotImplementedException();
@@ -22,7 +24,9 @@ namespace CarGallery.DataAccess.SqlServer
 
         public ObservableCollection<Brand> GetAllData()
         {
-            throw new NotImplementedException();
+            var brands = from Brand in DataClasses1DataContext.Brands
+                          select Brand;
+            return ObserverHelper.ToObservableCollection(brands);
         }
 
         public Brand GetData(int id)
