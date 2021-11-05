@@ -12,6 +12,10 @@ namespace CarGallery.DataAccess.SqlServer
     public class CarColorsRepository : ICarColorsRepository
     {
         public DataClasses1DataContext DataClasses1DataContext { get; set; }
+        public CarColorsRepository()
+        {
+            DataClasses1DataContext = new DataClasses1DataContext();
+        }
         public void AddData(CarColor data)
         {
             throw new NotImplementedException();

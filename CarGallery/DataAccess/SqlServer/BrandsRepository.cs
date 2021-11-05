@@ -12,6 +12,10 @@ namespace CarGallery.DataAccess.SqlServer
     public class BrandsRepository : IBrandsRepostory
     {
         public DataClasses1DataContext DataClasses1DataContext { get; set; }
+        public BrandsRepository()
+        {
+            DataClasses1DataContext = new DataClasses1DataContext();
+        }
         public void AddData(Brand data)
         {
             throw new NotImplementedException();

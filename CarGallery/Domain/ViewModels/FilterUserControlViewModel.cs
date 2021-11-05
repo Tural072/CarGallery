@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Linq;
+using System.Linq;
 using System.Text;
 
 namespace CarGallerry.Domain.ViewModels
@@ -18,14 +19,19 @@ namespace CarGallerry.Domain.ViewModels
         public ObservableCollection<Brand> Brands { get; set; }
         public ObservableCollection<CarColor> CarColors { get; set; }
         public ObservableCollection<BanType> BanTypes { get; set; }
-        public FilterUserControlViewModel(FilterUserControl filterUserControl)
+        public FilterUserControlViewModel(FilterUserControl filterUserControl,BanTypesRepository banTypesRepository,
+            CarColorsRepository carColorsRepository, BrandsRepository brandsRepository)
         {
             Brands = new ObservableCollection<Brand>();
             CarColors = new ObservableCollection<CarColor>();
             BanTypes = new ObservableCollection<BanType>();
-            Brands = _brand.GetAllData();
-            CarColors = _carColor.GetAllData();
-            BanTypes = _bandType.GetAllData();
+            _brand = brandsRepository;
+            _carColor = carColorsRepository;
+            _bandType = banTypesRepository;
+        
+            filterUserControl.banTypeCmbbx.ItemsSource = _bandType.GetAllData().Select(bt => bt.Name);
+            filterUserControl.markaCmbbx.ItemsSource = _brand.GetAllData().Select(bt => bt.Name);
+            filterUserControl.colorCmbbx.ItemsSource = _carColor.GetAllData().Select(bt => bt.Name);
         }
     }
 }
