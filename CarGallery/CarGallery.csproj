@@ -91,6 +91,7 @@
     <Compile Include="Domain\Abstractions\ICarsRepository.cs" />
     <Compile Include="Domain\Abstractions\IPetrolTypeRepository.cs" />
     <Compile Include="Domain\Abstractions\IRepository.cs" />
+    <Compile Include="Domain\AdditionalClasses\Helper.cs" />
     <Compile Include="Domain\AdditionalClasses\ObserverHelper.cs" />
     <Compile Include="Domain\ViewModels\BaseViewModel.cs" />
     <Compile Include="Domain\ViewModels\FilterUserControlViewModel.cs" />

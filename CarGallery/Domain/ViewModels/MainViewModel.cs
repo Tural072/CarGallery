@@ -13,6 +13,9 @@ namespace CarGallerry.Domain.ViewModels
     {
         public FilterUserControl filterUserControl { get; set; }
         public RelayCommand FilterBtnCommand { get; set; }
+        public RelayCommand BrandCommand { get; set; }
+        public RelayCommand BanCommand { get; set; }
+        public RelayCommand CarColorCommand { get; set; }
         public ObservableCollection<Car> Cars { get; set; }
         public IRepository<Car> _repo { get; set; }
         public MainViewModel(MainWindow mainWindow,ICarsRepository pathRepository)
