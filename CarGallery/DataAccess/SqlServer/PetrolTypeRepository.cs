@@ -1,4 +1,5 @@
-﻿using CarGallery.Domain.Abstractions;
+﻿using CarGallerry.Domain.AdditionalClasses;
+using CarGallery.Domain.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,11 @@ namespace CarGallery.DataAccess.SqlServer
 {
     public class PetrolTypeRepository : IPetrolTypeRepository
     {
+        public DataClasses1DataContext DataClasses1DataContext { get; set; }
+        public PetrolTypeRepository()
+        {
+            DataClasses1DataContext = new DataClasses1DataContext();
+        }
         public void AddData(PetrolType data)
         {
             throw new NotImplementedException();
@@ -22,7 +28,9 @@ namespace CarGallery.DataAccess.SqlServer
 
         public ObservableCollection<PetrolType> GetAllData()
         {
-            throw new NotImplementedException();
+            var petrolType = from PetrolType in DataClasses1DataContext.PetrolTypes
+                          select PetrolType;
+            return ObserverHelper.ToObservableCollection(petrolType);
         }
 
         public PetrolType GetData(int id)

@@ -18,30 +18,35 @@ namespace CarGallerry.Domain.ViewModels
         public IRepository<Brand> _brand { get; set; }
         public IRepository<CarColor> _carColor { get; set; }
         public IRepository<BanType> _bandType { get; set; }
+        public IRepository<PetrolType> _petrolType { get; set; }
         public ObservableCollection<Brand> Brands { get; set; }
         public ObservableCollection<CarColor> CarColors { get; set; }
         public ObservableCollection<BanType> BanTypes { get; set; }
+        public ObservableCollection<PetrolType> PetrolTypes { get; set; }
         public RelayCommand SearchBtnClick { get; set; }
         public RelayCommand BrandComboBoxSelectionChanged { get; set; }
         public RelayCommand ColorComboBoxSelectionChanged { get; set; }
         public RelayCommand BanTypeComboBoxSelectionChanged { get; set; }
+        public RelayCommand PetrolTypeComboBoxSelectionChanged { get; set; }
    
         public ObservableCollection<Car> Cars { get; set; }
         public FilterUserControlViewModel(FilterUserControl filterUserControl,BanTypesRepository banTypesRepository,
-            CarColorsRepository carColorsRepository, BrandsRepository brandsRepository)
+            CarColorsRepository carColorsRepository, BrandsRepository brandsRepository,PetrolTypeRepository petrolTypeRepository)
         {
             Brands = new ObservableCollection<Brand>();
             CarColors = new ObservableCollection<CarColor>();
             BanTypes = new ObservableCollection<BanType>();
+            PetrolTypes = new ObservableCollection<PetrolType>();
             _brand = brandsRepository;
             _carColor = carColorsRepository;
             _bandType = banTypesRepository;
+            _petrolType = petrolTypeRepository;
             Cars = new ObservableCollection<Car>();
         
             filterUserControl.banTypeCmbbx.ItemsSource = _bandType.GetAllData().Select(bt => bt.Name);
             filterUserControl.markaCmbbx.ItemsSource = _brand.GetAllData().Select(bt => bt.Name);
             filterUserControl.colorCmbbx.ItemsSource = _carColor.GetAllData().Select(bt => bt.Name);
-
+            filterUserControl.petrolTypeCmbbx.ItemsSource = _petrolType.GetAllData().Select(pt=>pt.Name);
 
             BrandComboBoxSelectionChanged = new RelayCommand((sender) => 
             {
@@ -79,6 +84,20 @@ namespace CarGallerry.Domain.ViewModels
 
                 }
             });
+
+            PetrolTypeComboBoxSelectionChanged = new RelayCommand((sender) =>
+            {
+                try
+                {
+                    Helper.MainWindow.Listbox.ItemsSource = ObserverHelper.ToObservableCollection(Cars.Where(c => c.PetrolType.Name.ToString() == filterUserControl.petrolTypeCmbbx.SelectedItem.ToString()));
+                }
+                catch (Exception)
+                {
+
+                }
+            });
+
+
             SearchBtnClick = new RelayCommand((sender) =>
             {
                 try
@@ -90,7 +109,6 @@ namespace CarGallerry.Domain.ViewModels
                    c.Price.Value <= decimal.Parse(filterUserControl.maxPriceTxtbx.Text) &&
                    c.IsNew==filterUserControl.newRadiobtn.IsChecked));
                    Helper.MainWindow.Listbox.ItemsSource = Helper.Cars1;
-
                 }
                 catch (Exception)
                 {
