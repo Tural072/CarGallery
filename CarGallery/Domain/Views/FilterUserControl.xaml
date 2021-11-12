@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CarGallerry.Views"
+             xmlns:local="clr-namespace:CarGallerry.Views" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400">
     <StackPanel Background="Wheat">
@@ -15,7 +15,13 @@
                       FontSize="25"
                       Width="200"
                       Margin="10,4,0,4"
-                      ></ComboBox>
+                      >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding BrandComboBoxSelectionChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
         </WrapPanel>
 
         <WrapPanel Margin="0,0,0,20">
@@ -25,7 +31,13 @@
             <ComboBox Name="banTypeCmbbx"
                       FontSize="25"
                       Width="200"
-                      Margin="10,4,0,4"></ComboBox>
+                      Margin="10,4,0,4">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding BanTypeComboBoxSelectionChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
         </WrapPanel>
 
         <WrapPanel Margin="0,0,0,20">
@@ -36,7 +48,13 @@
             <ComboBox Name="colorCmbbx"
                       FontSize="25"
                       Width="200"
-                      Margin="10,4,0,4"></ComboBox>
+                      Margin="10,4,0,4">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ColorComboBoxSelectionChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
         </WrapPanel>
         <WrapPanel Margin="0,0,0,20">
             <Label Content="Yurus "
@@ -50,7 +68,9 @@
             <TextBox x:Name="minTxtbx"
                      Width="50"
                      FontSize="20"
-                     Margin="10,4,0,4"></TextBox>
+                     Margin="10,4,0,4">
+                
+            </TextBox>
             <Label Content="max"
                    FontSize="15"
                    FontFamily="comic sans ms"
@@ -58,7 +78,9 @@
             <TextBox x:Name="maxTxtbx"
                      Width="50"
                      FontSize="20"
-                     Margin="10,4,0,4"></TextBox>
+                     Margin="10,4,0,4">
+                
+            </TextBox>
         </WrapPanel>
         <WrapPanel Margin="0,0,0,20">
             <Label Content="Qiymet "
@@ -72,7 +94,9 @@
             <TextBox x:Name="minPriceTxtbx"
                      Width="50"
                      FontSize="20"
-                     Margin="10,4,0,4"></TextBox>
+                     Margin="10,4,0,4">
+           
+            </TextBox>
             <Label Content="max"
                    FontSize="15"
                    FontFamily="comic sans ms"
@@ -80,7 +104,9 @@
             <TextBox x:Name="maxPriceTxtbx"
                      Width="50"
                      FontSize="20"
-                     Margin="10,4,0,4"></TextBox>
+                     Margin="10,4,0,4">
+       
+            </TextBox>
         </WrapPanel>
         <WrapPanel Margin="0,0,0,20">
             <RadioButton x:Name="newRadiobtn"
@@ -140,6 +166,7 @@
                 Width="200"
                 HorizontalAlignment="Left"
                 Margin="10,4,0,4"
-                FontFamily="comic sans ms"></Button>
+                FontFamily="comic sans ms"
+                Command="{Binding SearchBtnClick}"></Button>
     </StackPanel>
 </UserControl>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CarGalleryDb" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ROGSTRIX;Initial Catalog=CarGalleryDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="CarGallery.Properties.Settings" SettingsPropertyName="CarGalleryDbConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=STHQ0126-15;Initial Catalog=CarGalleryDb;User ID=admin;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="CarGallery.Properties.Settings" SettingsPropertyName="CarGalleryDbConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.BanTypes" Member="BanTypes">
     <Type Name="BanType">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

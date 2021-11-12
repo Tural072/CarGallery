@@ -2,6 +2,7 @@
 using CarGallerry.Views;
 using CarGallery.DataAccess.SqlServer;
 using CarGallery.Domain.Abstractions;
+using CarGallery.Domain.AdditionalClasses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ namespace CarGallerry.Domain.ViewModels
         public RelayCommand CarColorCommand { get; set; }
         public ObservableCollection<Car> Cars { get; set; }
         public IRepository<Car> _repo { get; set; }
-        public MainViewModel(MainWindow mainWindow,ICarsRepository pathRepository)
+        public MainViewModel(MainWindow mainWindow, ICarsRepository pathRepository)
         {
             _repo = pathRepository;
             Cars = new ObservableCollection<Car>();
@@ -28,6 +29,9 @@ namespace CarGallerry.Domain.ViewModels
               {
                   mainWindow.userGrid.Children.Add(filterUserControl);
               });
+            Helper.MainWindow = mainWindow;
+            Helper.Cars = Cars;
+
         }
     }
 }
